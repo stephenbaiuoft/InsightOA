@@ -195,7 +195,8 @@ class MedianQueue:
             median = self.min_right_heap[0] - self.max_left_heap[0]
             median = round(median/2.0)
             return str(median)
-        elif l_size > l_size:
+        elif l_size > r_size:
+            # return left heap => always put negative
             return str(round(-self.max_left_heap[0]))
         else:
             return str(round(self.min_right_heap[0]))
