@@ -1,5 +1,5 @@
 # Dependency
-1. make sure _underscores_underscores_init_underscores__underscores_.py is included in src
+1. make sure Underscores init Underscores.py is included in src
 
 # Python Run Environment
 1. python 3.6
