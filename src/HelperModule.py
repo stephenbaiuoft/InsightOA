@@ -31,7 +31,7 @@ class InputProcessor:
         reset_val()
         self.rez = line.split("|")
         # check other_id attribute: > 0 meaning invalid
-        if len(self.rez[self.OTHER_ID]) > 0:
+        if len(self.rez) != 21 or len(self.rez[self.OTHER_ID]) > 0:
             self.valid = False
             return
 

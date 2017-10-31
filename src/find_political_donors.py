@@ -1,8 +1,11 @@
 import sys
 from HelperModule import InputProcessor
-
+import time
 
 def find_political_donors():
+    # debugging timing
+    start_time = time.time()
+
     if len(sys.argv) < 2:
         print("Please enter input filename")
         sys.exit(0)
@@ -49,6 +52,7 @@ def find_political_donors():
     f_in.close()
     m_date.close()
     m_zip.close()
+    print("program executed: %s" %(time.time() - start_time))
 
 # this is the parser and getting info
 def process_line(input):
