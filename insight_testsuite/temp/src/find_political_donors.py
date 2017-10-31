@@ -55,6 +55,7 @@ def find_political_donors():
     f_in.close()
     m_date.close()
     m_zip.close()
+    # for debugging only--> can comment out
     print("program executed: %s" %(time.time() - start_time))
 
 # this is the parser and getting info
