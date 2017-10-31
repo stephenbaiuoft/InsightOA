@@ -2,6 +2,7 @@ import sys
 from HelperModule import InputProcessor
 import time
 
+
 def find_political_donors():
     # debugging timing
     start_time = time.time()
@@ -11,11 +12,15 @@ def find_political_donors():
         sys.exit(0)
 
     inputfilename = sys.argv[1]
-
-    f_in = open(inputfilename, "r")
+    # default to same src if no output path is provided
     f_out1 = "medianvals_by_date.txt"
     f_out2 = "medianvals_by_zip.txt"
+    # script order: zip followed by date
+    if len(sys.argv) == 4:
+        f_out2 = sys.argv[2]
+        f_out1 = sys.argv[3]
 
+    f_in = open(inputfilename, "r")
     try:
         m_date = open(f_out1, "w")
         m_zip = open(f_out2, "w")
@@ -52,14 +57,9 @@ def find_political_donors():
     f_in.close()
     m_date.close()
     m_zip.close()
+    # for debugging only--> can comment out
     print("program executed: %s" %(time.time() - start_time))
 
-# this is the parser and getting info
-def process_line(input):
-    # split components by |
-    components = input.split("|")
-
-    pass
 
 if __name__ == "__main__":
     find_political_donors()
