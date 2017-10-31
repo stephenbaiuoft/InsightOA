@@ -99,7 +99,8 @@ function run_all_tests {
     setup_testing_input_output
     # echo "grader_root is: <${GRADER_ROOT}>"  # current root
     cd ${GRADER_ROOT}/temp
-    bash run.sh 2>&1
+    # modified
+    bash run.sh ../tests/${test_folder}/input/itcont.txt ./output/medianvals_by_zip.txt ./output/medianvals_by_date.txt 2>&1
     cd ../
 
     compare_outputs
