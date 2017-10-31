@@ -97,7 +97,7 @@ function run_all_tests {
   for test_folder in ${TEST_FOLDERS}; do
 
     setup_testing_input_output
-
+    # echo "grader_root is: <${GRADER_ROOT}>"  # current root
     cd ${GRADER_ROOT}/temp
     bash run.sh 2>&1
     cd ../
