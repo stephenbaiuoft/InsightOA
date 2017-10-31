@@ -10,18 +10,15 @@ def find_political_donors():
         print("Please enter input filename")
         sys.exit(0)
 
-    # set default in case no output path is specified
     inputfilename = sys.argv[1]
     f_out1 = "medianvals_by_date.txt"
     f_out2 = "medianvals_by_zip.txt"
-
+    # script order: zip followed by date
     if len(sys.argv) == 4:
-        print("output file specified")
-        f_out1 = sys.argv[3]
         f_out2 = sys.argv[2]
+        f_out1 = sys.argv[3]
 
     f_in = open(inputfilename, "r")
-
     try:
         m_date = open(f_out1, "w")
         m_zip = open(f_out2, "w")
@@ -34,9 +31,8 @@ def find_political_donors():
         input_handler.process_input(line)
         # get line_zip
         line_zip = input_handler.get_zip_result()
-
         if line_zip is not None:
-            m_zip.write(line_zip + "\n")
+            m_zip.write(line_zip+"\n")
 
     # get date_map
     date_map = input_handler.get_date_result()
@@ -60,6 +56,13 @@ def find_political_donors():
     m_date.close()
     m_zip.close()
     print("program executed: %s" %(time.time() - start_time))
+
+# this is the parser and getting info
+def process_line(input):
+    # split components by |
+    components = input.split("|")
+
+    pass
 
 if __name__ == "__main__":
     find_political_donors()

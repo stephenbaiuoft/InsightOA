@@ -59,7 +59,7 @@ function compare_outputs {
   OUTPUT_FILENAME=medianvals_by_zip.txt
   PROJECT_ANSWER_PATH1=${GRADER_ROOT}/temp/output/${OUTPUT_FILENAME}
   TEST_ANSWER_PATH1=${GRADER_ROOT}/tests/${test_folder}/output/${OUTPUT_FILENAME}
-   
+
   DIFF_RESULT1=$(diff -bB ${PROJECT_ANSWER_PATH1} ${TEST_ANSWER_PATH1} | wc -l)
   if [ "${DIFF_RESULT1}" -eq "0" ] && [ -f ${PROJECT_ANSWER_PATH1} ]; then
     echo -e "[${color_green}PASS${color_norm}]: ${test_folder} ${OUTPUT_FILENAME}"
@@ -72,7 +72,7 @@ function compare_outputs {
   OUTPUT_FILENAME=medianvals_by_date.txt
   PROJECT_ANSWER_PATH2=${GRADER_ROOT}/temp/output/${OUTPUT_FILENAME}
   TEST_ANSWER_PATH2=${GRADER_ROOT}/tests/${test_folder}/output/${OUTPUT_FILENAME}
-  
+
   DIFF_RESULT2=$(diff -bB ${PROJECT_ANSWER_PATH2} ${TEST_ANSWER_PATH2} | wc -l)
   if [ "${DIFF_RESULT2}" -eq "0" ] && [ -f ${PROJECT_ANSWER_PATH2} ]; then
     echo -e "[${color_green}PASS${color_norm}]: ${test_folder} ${OUTPUT_FILENAME}"
@@ -95,12 +95,10 @@ function run_all_tests {
 
   # Loop through all tests
   for test_folder in ${TEST_FOLDERS}; do
-
     setup_testing_input_output
-    # echo "grader_root is: <${GRADER_ROOT}>"  # current root
+
     cd ${GRADER_ROOT}/temp
-    # modified
-    bash run.sh ../tests/${test_folder}/input/itcont.txt ./output/medianvals_by_zip.txt ./output/medianvals_by_date.txt 2>&1
+    bash run.sh 2>&1
     cd ../
 
     compare_outputs

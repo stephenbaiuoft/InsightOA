@@ -1,4 +1,5 @@
 import heapq
+import math
 
 # this class purely processes input line
 class InputProcessor:
@@ -19,6 +20,14 @@ class InputProcessor:
         self.OTHER_ID = 15
         self.TRANSACTION_AMT = 14
 
+    # helper function to handle python 3.0 rounding
+    # to cloest even number problem
+    def round_up(self, num):
+        # handle the x.5 case
+        if num - math.floor(num) == 0.5:
+            return math.ceil(num)
+
+        return round(num)
 
     # process each input line
     def process_input(self, line):
@@ -85,9 +94,9 @@ class InputProcessor:
             self.zip_map[cmte_zip_id] = median_queue
 
             # first entry
-            zip_r.append(str(round(amt)))
+            zip_r.append(str(self.round_up(amt)))
             zip_r.append("1")
-            zip_r.append(str(round(amt)))
+            zip_r.append(str(self.round_up(amt)))
         else:
             # insert
             median_queue.insert(amt)
@@ -137,7 +146,15 @@ class MedianQueue:
         self.min_right_heap = []
         self.max_left_heap = []
         self.total = 0.0
-        self.count = 0.0
+        self.count = 0
+
+    # helper function to handle python 3.0 rounding
+    # to cloest even number problem
+    def round_up(self, num):
+        # handle the x.5 case
+        if num - math.floor(num) == 0.5:
+            return math.ceil(num)
+        return round(num)
 
     def insert(self, num):
         # update count & total
@@ -193,18 +210,17 @@ class MedianQueue:
         # equal len
         if l_size == r_size:
             median = self.min_right_heap[0] - self.max_left_heap[0]
-            median = round(median/2.0)
+            median = self.round_up(median/2)
             return str(median)
         elif l_size > r_size:
-            # return left heap => always put negative
-            return str(round(-self.max_left_heap[0]))
+            return str(self.round_up(-self.max_left_heap[0]))
         else:
-            return str(round(self.min_right_heap[0]))
+            return str(self.round_up(self.min_right_heap[0]))
 
     # return # of elements so far
     def get_queue_len(self):
-        return str(round(self.count))
+        return str(self.count)
 
     # return total value of queue so far
     def get_total(self):
-        return str(round(self.total))
+        return str(self.round_up(self.total))
